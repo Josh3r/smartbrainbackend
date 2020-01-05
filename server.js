@@ -38,8 +38,14 @@ app.use(express.json()) // We use app.use() middleware
 
 // Index endpoint
 app.get('/',(req,res)=>{
-    res.send(database.users);
-    console.log(":)");
+    db('users').returning('*')
+    .then(users=>{
+        res.json("Running fine!");
+        //console.log("Does this work?:");
+        //console.log(users);
+        //res.json(users); , PS: It works ;)
+    })
+    //console.log(":)");
 })
 
 // Sign In endpoint:
